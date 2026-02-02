@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { User, Mail, Phone, Briefcase, GraduationCap, Award, ArrowRight } from "lucide-react";
+import { User, Mail, Briefcase, GraduationCap, Award, ArrowRight } from "lucide-react";
 
 export default function Directors() {
   return (
@@ -44,25 +44,6 @@ export default function Directors() {
               expertise={["Legal Research", "Academic Publishing", "Diplomacy", "Public Speaking", "Youth Engagement"]}
               photoUrl="https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/e2egzml0_IMG-20250212-WA0002.jpg"
               email="directorspapublication@gmail.com"
-            />
-
-            {/* Director of Publications */}
-            <DirectorCard
-              position="Director of Publications"
-              name="To Be Updated"
-              qualifications="Details will be added soon"
-              bio="The Director of Publications manages the editorial and publication processes across all publishing houses. They work closely with authors, editors, and reviewers to ensure timely and quality publication of all manuscripts."
-              expertise={["Editorial Management", "Peer Review Process", "Publication Standards", "Author Relations"]}
-              reverse
-            />
-
-            {/* Director of International Operations */}
-            <DirectorCard
-              position="Director of International Operations"
-              name="To Be Updated"
-              qualifications="Details will be added soon"
-              bio="The Director of International Operations heads Blue Globe International and Aquitas International, managing all international publishing activities and establishing global academic partnerships."
-              expertise={["International Publishing", "Global Partnerships", "Cross-cultural Studies", "Academic Networks"]}
             />
           </div>
         </div>
