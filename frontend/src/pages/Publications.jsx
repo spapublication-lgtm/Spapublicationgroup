@@ -1,18 +1,19 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BookOpen, BookMarked, FileText, ArrowRight, User, Building2 } from "lucide-react";
+import { BookOpen, BookMarked, FileText, ArrowRight, User, Building2, X } from "lucide-react";
 
 const publications = [
-  // New books
+  // Legal Luminaries books
   {
     id: "6",
     title: "Realities Unmasked: AI, Intimacy and the Absurd Digital World",
     author: "Dr. Sovana Mukherjee",
     publication_type: "edited_volume",
     publisher: "Legal Luminaries Publication House",
+    publisher_slug: "legal-luminaries",
     year: 2025,
     cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/vwzvkts8_IMG-20251220-WA0002.jpg",
   },
@@ -22,6 +23,7 @@ const publications = [
     author: "Adv. G. Raja Kumari, Adv. Amandeep Kaur",
     publication_type: "edited_volume",
     publisher: "Legal Luminaries Publication House",
+    publisher_slug: "legal-luminaries",
     year: 2025,
     cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/1ln9dlgj_IMG-20250610-WA0007.jpg",
   },
@@ -31,6 +33,7 @@ const publications = [
     author: "Adv. G Raja Kumari, Adv. Amandeep Kaur, Adv. Sukhmandeep Kaur, Mr. Prasanna Kannan",
     publication_type: "edited_volume",
     publisher: "Legal Luminaries Publication House",
+    publisher_slug: "legal-luminaries",
     year: 2025,
     cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/vgcqe2dx_IMG-20250612-WA0003.jpg",
   },
@@ -40,6 +43,7 @@ const publications = [
     author: "Adv. Amandeep Kaur",
     publication_type: "edited_volume",
     publisher: "Legal Luminaries Publication House",
+    publisher_slug: "legal-luminaries",
     year: 2025,
     cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/qnac6o8y_IMG-20250603-WA0017.jpg",
   },
@@ -49,16 +53,17 @@ const publications = [
     author: "Dr. R.N Singh, Dr. Pawan Kumar Srivastava",
     publication_type: "edited_volume",
     publisher: "Legal Luminaries Publication House",
+    publisher_slug: "legal-luminaries",
     year: 2025,
     cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/a86vzj58_IMG-20250412-WA0005.jpg",
   },
-  // Previous books
   {
     id: "1",
     title: "The Constitution as a Shield: Advancing Women's Rights",
     author: "Dr. R.N Singh, Dr. Priyanka Puri, Dr. Kalpana Thakur",
     publication_type: "edited_volume",
     publisher: "Legal Luminaries Publication House",
+    publisher_slug: "legal-luminaries",
     year: 2026,
     cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/bflj8lub_IMG_20260124_133919.jpg",
   },
@@ -68,6 +73,7 @@ const publications = [
     author: "Dr. Swarup Mukherjee, Dr. Subholaxmi Mukherjee (Editors)",
     publication_type: "edited_volume",
     publisher: "Legal Luminaries Publication House",
+    publisher_slug: "legal-luminaries",
     year: 2026,
     cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/60x9qbtm_IMG-20260123-WA0006.jpg",
   },
@@ -77,6 +83,7 @@ const publications = [
     author: "Dr. Kalpana Thakur, Ms. Alka Rani, Mr. Rahul Mdhara",
     publication_type: "edited_volume",
     publisher: "Legal Luminaries Publication House",
+    publisher_slug: "legal-luminaries",
     year: 2026,
     cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/p83wlzn2_IMG-20260121-WA0006.jpg",
   },
@@ -86,6 +93,7 @@ const publications = [
     author: "Ms. Alka Rani, Dr. Kalpana Thakur, Mr. Rahul Mdhara",
     publication_type: "edited_volume",
     publisher: "Legal Luminaries Publication House",
+    publisher_slug: "legal-luminaries",
     year: 2026,
     cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/wr3xhb54_IMG-20260121-WA0005.jpg",
   },
@@ -95,17 +103,48 @@ const publications = [
     author: "Mr. Rahul Mdhara, Dr. Kalpana Thakur, Ms. Alka Rani",
     publication_type: "edited_volume",
     publisher: "Legal Luminaries Publication House",
+    publisher_slug: "legal-luminaries",
     year: 2026,
     cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/79kygf7i_IMG-20260119-WA0017.jpg",
   },
 ];
 
-export default function Publications() {
-  const [activeTab, setActiveTab] = useState("all");
+const companyNames = {
+  "spa-publications": "SPA Publications",
+  "legal-luminaries": "Legal Luminaries Publication House",
+  "intellect-jurists": "Intellect Jurists Publishers",
+  "blue-globe-international": "Blue Globe International",
+  "aquitas-international": "Aquitas International",
+};
 
-  const filtered = activeTab === "all" 
-    ? publications 
-    : publications.filter(p => p.publication_type === activeTab);
+export default function Publications() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState("all");
+  const companyFilter = searchParams.get("company");
+
+  useEffect(() => {
+    if (companyFilter) {
+      setActiveTab("all");
+    }
+  }, [companyFilter]);
+
+  const clearCompanyFilter = () => {
+    setSearchParams({});
+  };
+
+  let filtered = publications;
+  
+  // Filter by company first if company param exists
+  if (companyFilter) {
+    filtered = filtered.filter(p => p.publisher_slug === companyFilter);
+  }
+  
+  // Then filter by type if not "all"
+  if (activeTab !== "all") {
+    filtered = filtered.filter(p => p.publication_type === activeTab);
+  }
+
+  const companyName = companyFilter ? companyNames[companyFilter] : null;
 
   return (
     <div data-testid="publications-page" className="min-h-screen pt-20">
@@ -116,25 +155,49 @@ export default function Publications() {
               <div className="h-[1px] w-12 bg-[#C5A059]" />
               <span className="text-[#C5A059] text-sm font-medium tracking-widest uppercase">Our Catalog</span>
             </div>
-            <h1 className="font-serif text-5xl sm:text-6xl font-medium text-white mb-6">Publications</h1>
-            <p className="text-slate-400 text-lg">Explore our collection of {publications.length} academic publications from Legal Luminaries Publication House.</p>
+            <h1 className="font-serif text-5xl sm:text-6xl font-medium text-white mb-6">
+              {companyName ? companyName : "Publications"}
+            </h1>
+            <p className="text-slate-400 text-lg">
+              {companyName 
+                ? `Explore ${filtered.length} publication${filtered.length !== 1 ? 's' : ''} from ${companyName}.`
+                : `Explore our collection of ${publications.length} academic publications.`
+              }
+            </p>
           </div>
         </div>
       </section>
 
       <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Company Filter Badge */}
+          {companyFilter && (
+            <div className="flex justify-center mb-8">
+              <div className="bg-[#C5A059]/10 border border-[#C5A059]/20 px-4 py-2 flex items-center gap-3">
+                <span className="text-slate-700 text-sm">
+                  Showing publications from: <strong className="text-[#C5A059]">{companyName}</strong>
+                </span>
+                <button 
+                  onClick={clearCompanyFilter}
+                  className="text-slate-500 hover:text-slate-700 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          )}
+
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <div className="flex justify-center mb-12">
               <TabsList className="bg-white border p-1 rounded-none">
                 <TabsTrigger value="all" data-testid="tab-all" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
-                  <BookMarked className="w-4 h-4 mr-2" /> All ({publications.length})
+                  <BookMarked className="w-4 h-4 mr-2" /> All ({companyFilter ? filtered.length : publications.length})
                 </TabsTrigger>
                 <TabsTrigger value="book" data-testid="tab-book" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
                   <BookOpen className="w-4 h-4 mr-2" /> Books
                 </TabsTrigger>
                 <TabsTrigger value="edited_volume" data-testid="tab-edited" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
-                  <FileText className="w-4 h-4 mr-2" /> Edited Volumes ({publications.filter(p => p.publication_type === 'edited_volume').length})
+                  <FileText className="w-4 h-4 mr-2" /> Edited Volumes
                 </TabsTrigger>
                 <TabsTrigger value="research" data-testid="tab-research" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
                   <FileText className="w-4 h-4 mr-2" /> Research
@@ -147,7 +210,17 @@ export default function Publications() {
                 <div className="text-center py-16">
                   <BookMarked className="w-16 h-16 text-slate-300 mx-auto mb-4" />
                   <h3 className="font-serif text-2xl text-slate-700 mb-2">No Publications Found</h3>
-                  <p className="text-slate-500">Publications in this category will be added soon.</p>
+                  <p className="text-slate-500 mb-6">
+                    {companyFilter 
+                      ? `No publications available from ${companyName} yet.`
+                      : "Publications in this category will be added soon."
+                    }
+                  </p>
+                  {companyFilter && (
+                    <Button onClick={clearCompanyFilter} variant="outline" className="rounded-none">
+                      View All Publications
+                    </Button>
+                  )}
                 </div>
               ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
@@ -158,7 +231,7 @@ export default function Publications() {
                       </div>
                       <CardContent className="p-4">
                         <span className="inline-block bg-[#C5A059]/10 text-[#C5A059] px-2 py-0.5 text-xs font-semibold tracking-wider uppercase mb-2">
-                          Edited Volume
+                          {pub.publication_type === "edited_volume" ? "Edited Volume" : pub.publication_type === "book" ? "Book" : "Research"}
                         </span>
                         <h3 className="font-serif text-sm font-medium text-slate-900 mb-2 line-clamp-2 group-hover:text-[#C5A059] transition-colors leading-tight">
                           {pub.title}
@@ -169,7 +242,7 @@ export default function Publications() {
                         </div>
                         <div className="flex items-center gap-1 text-slate-400 text-xs">
                           <Building2 className="w-3 h-3" />
-                          <span className="truncate">Legal Luminaries</span>
+                          <span className="truncate">{pub.publisher.replace(" Publication House", "")}</span>
                         </div>
                       </CardContent>
                     </Card>
@@ -178,6 +251,15 @@ export default function Publications() {
               )}
             </TabsContent>
           </Tabs>
+
+          {/* Back to All Publications */}
+          {companyFilter && filtered.length > 0 && (
+            <div className="text-center mt-12">
+              <Button onClick={clearCompanyFilter} variant="outline" className="rounded-none border-slate-300">
+                View All Publications
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 
