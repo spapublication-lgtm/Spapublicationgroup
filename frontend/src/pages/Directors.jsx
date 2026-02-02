@@ -33,16 +33,17 @@ export default function Directors() {
             <div className="w-16 h-[3px] bg-[#C5A059] mx-auto" />
           </div>
 
-          {/* Director Cards - Placeholder for actual directors */}
+          {/* Director Cards */}
           <div className="space-y-12">
-            {/* Managing Director */}
+            {/* Founder & Managing Director */}
             <DirectorCard
-              position="Managing Director"
-              name="To Be Updated"
-              qualifications="Details will be added soon"
-              bio="The Managing Director oversees all operations of SPA Publication Group, ensuring excellence in academic publishing across all five publishing houses. They are responsible for strategic planning, business development, and maintaining the highest standards of scholarly publishing."
-              expertise={["Strategic Leadership", "Academic Publishing", "Business Development", "Quality Assurance"]}
-              photoUrl="https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/g55d1lrl_IMG-20250212-WA0002.jpg"
+              position="Founder & Managing Director"
+              name="Karan Kaushal"
+              qualifications="BA, LLB (Hons.) - Rayat Bahra Professional University"
+              bio="Karan Kaushal is the Founder and Managing Director of SPA Publication Group, established in January 2025. A passionate law student with expertise in diplomacy, legal research, and practical implementation of laws, he leads all five publishing houses under the SPA umbrella. With experience in legal internships, political consulting, and youth engagement, he brings a unique blend of academic excellence and entrepreneurial vision to academic publishing. He is committed to promoting scholarly excellence and making quality academic publications accessible to researchers, educators, and students across India and internationally."
+              expertise={["Legal Research", "Academic Publishing", "Diplomacy", "Public Speaking", "Youth Engagement"]}
+              photoUrl="https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/e2egzml0_IMG-20250212-WA0002.jpg"
+              email="directorspapublication@gmail.com"
             />
 
             {/* Director of Publications */}
@@ -131,7 +132,7 @@ export default function Directors() {
   );
 }
 
-function DirectorCard({ position, name, qualifications, bio, expertise, reverse = false, photoUrl }) {
+function DirectorCard({ position, name, qualifications, bio, expertise, reverse = false, photoUrl, email }) {
   return (
     <Card className="bg-slate-50 border-0 rounded-none overflow-hidden">
       <CardContent className="p-0">
@@ -176,12 +177,11 @@ function DirectorCard({ position, name, qualifications, bio, expertise, reverse 
             </div>
 
             <div className="flex gap-4 pt-4 border-t border-slate-200">
-              <a href="mailto:spapublications@gmail.com" className="flex items-center gap-2 text-slate-600 hover:text-[#C5A059] text-sm">
-                <Mail className="w-4 h-4" /> Email
-              </a>
-              <a href="tel:+916284607500" className="flex items-center gap-2 text-slate-600 hover:text-[#C5A059] text-sm">
-                <Phone className="w-4 h-4" /> Call
-              </a>
+              {email && (
+                <a href={`mailto:${email}`} className="flex items-center gap-2 text-slate-600 hover:text-[#C5A059] text-sm">
+                  <Mail className="w-4 h-4" /> {email}
+                </a>
+              )}
             </div>
           </div>
         </div>
