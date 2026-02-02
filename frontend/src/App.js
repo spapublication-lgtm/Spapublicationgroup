@@ -9,6 +9,7 @@ import CompanyDetail from "@/pages/CompanyDetail";
 import Publications from "@/pages/Publications";
 import Submission from "@/pages/Submission";
 import OfficeBearers from "@/pages/OfficeBearers";
+import Directors from "@/pages/Directors";
 import Contact from "@/pages/Contact";
 
 import Navbar from "@/components/Navbar";
@@ -28,6 +29,7 @@ function App() {
             <Route path="/publications" element={<Publications />} />
             <Route path="/submission" element={<Submission />} />
             <Route path="/office-bearers" element={<OfficeBearers />} />
+            <Route path="/directors" element={<Directors />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
