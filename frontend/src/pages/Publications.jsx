@@ -3,9 +3,62 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BookOpen, BookMarked, FileText, ArrowRight, User, Building2, X } from "lucide-react";
+import { BookOpen, BookMarked, FileText, ArrowRight, User, Building2, X, ShoppingCart, MessageCircle } from "lucide-react";
+
+const WHATSAPP_CATALOGUE = "https://wa.me/c/916284607500";
 
 const publications = [
+  // SPA Publications books
+  {
+    id: "11",
+    title: "Honor Killing in India: Critical Analysis",
+    author: "Bini Das",
+    publication_type: "book",
+    publisher: "SPA Publications",
+    publisher_slug: "spa-publications",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/hm0bvq7l_IMG-20250610-WA0009.jpg",
+  },
+  {
+    id: "12",
+    title: "Custody of Conflict: A Legal Commentary on the Enemy Property Act, 1968",
+    author: "Ms. Aiswarya S, Mr. I Madhav Ganesh",
+    publication_type: "book",
+    publisher: "SPA Publications",
+    publisher_slug: "spa-publications",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/253sy1je_IMG-20250807-WA0008.jpg",
+  },
+  {
+    id: "13",
+    title: "Resurgent Corporate Governance: The Saga of Scams Unfolded",
+    author: "Dr. Kalpana Thakur",
+    publication_type: "book",
+    publisher: "SPA Publications",
+    publisher_slug: "spa-publications",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/csybpqe0_IMG-20250611-WA0002.jpg",
+  },
+  {
+    id: "14",
+    title: "An Indian Outlook on Health Insurance",
+    author: "Dr. Sneha Marathe",
+    publication_type: "book",
+    publisher: "SPA Publications",
+    publisher_slug: "spa-publications",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/xm15wxhy_IMG-20250719-WA0041.jpg",
+  },
+  {
+    id: "15",
+    title: "Shipping Laws & Practice",
+    author: "Dr. M E Aliyar",
+    publication_type: "book",
+    publisher: "SPA Publications",
+    publisher_slug: "spa-publications",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/ojqcb2sa_IMG-20250719-WA0042.jpg",
+  },
   // Legal Luminaries books
   {
     id: "6",
@@ -134,17 +187,17 @@ export default function Publications() {
 
   let filtered = publications;
   
-  // Filter by company first if company param exists
   if (companyFilter) {
     filtered = filtered.filter(p => p.publisher_slug === companyFilter);
   }
   
-  // Then filter by type if not "all"
   if (activeTab !== "all") {
     filtered = filtered.filter(p => p.publication_type === activeTab);
   }
 
   const companyName = companyFilter ? companyNames[companyFilter] : null;
+  const bookCount = publications.filter(p => p.publication_type === 'book').length;
+  const editedCount = publications.filter(p => p.publication_type === 'edited_volume').length;
 
   return (
     <div data-testid="publications-page" className="min-h-screen pt-20">
@@ -170,17 +223,13 @@ export default function Publications() {
 
       <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Company Filter Badge */}
           {companyFilter && (
             <div className="flex justify-center mb-8">
               <div className="bg-[#C5A059]/10 border border-[#C5A059]/20 px-4 py-2 flex items-center gap-3">
                 <span className="text-slate-700 text-sm">
                   Showing publications from: <strong className="text-[#C5A059]">{companyName}</strong>
                 </span>
-                <button 
-                  onClick={clearCompanyFilter}
-                  className="text-slate-500 hover:text-slate-700 transition-colors"
-                >
+                <button onClick={clearCompanyFilter} className="text-slate-500 hover:text-slate-700 transition-colors">
                   <X className="w-4 h-4" />
                 </button>
               </div>
@@ -194,13 +243,10 @@ export default function Publications() {
                   <BookMarked className="w-4 h-4 mr-2" /> All ({companyFilter ? filtered.length : publications.length})
                 </TabsTrigger>
                 <TabsTrigger value="book" data-testid="tab-book" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
-                  <BookOpen className="w-4 h-4 mr-2" /> Books
+                  <BookOpen className="w-4 h-4 mr-2" /> Books ({bookCount})
                 </TabsTrigger>
                 <TabsTrigger value="edited_volume" data-testid="tab-edited" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
-                  <FileText className="w-4 h-4 mr-2" /> Edited Volumes
-                </TabsTrigger>
-                <TabsTrigger value="research" data-testid="tab-research" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
-                  <FileText className="w-4 h-4 mr-2" /> Research
+                  <FileText className="w-4 h-4 mr-2" /> Edited Volumes ({editedCount})
                 </TabsTrigger>
               </TabsList>
             </div>
@@ -211,27 +257,35 @@ export default function Publications() {
                   <BookMarked className="w-16 h-16 text-slate-300 mx-auto mb-4" />
                   <h3 className="font-serif text-2xl text-slate-700 mb-2">No Publications Found</h3>
                   <p className="text-slate-500 mb-6">
-                    {companyFilter 
-                      ? `No publications available from ${companyName} yet.`
-                      : "Publications in this category will be added soon."
-                    }
+                    {companyFilter ? `No publications available from ${companyName} yet.` : "Publications will be added soon."}
                   </p>
                   {companyFilter && (
-                    <Button onClick={clearCompanyFilter} variant="outline" className="rounded-none">
-                      View All Publications
-                    </Button>
+                    <Button onClick={clearCompanyFilter} variant="outline" className="rounded-none">View All Publications</Button>
                   )}
                 </div>
               ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                   {filtered.map((pub) => (
                     <Card key={pub.id} className="bg-white border rounded-none overflow-hidden group hover:shadow-xl transition-all" data-testid={`publication-card-${pub.id}`}>
-                      <div className="aspect-[3/4] overflow-hidden bg-slate-100">
+                      <div className="aspect-[3/4] overflow-hidden bg-slate-100 relative">
                         <img src={pub.cover_image} alt={pub.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        {/* Buy Now Overlay */}
+                        <div className="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <a 
+                            href={WHATSAPP_CATALOGUE} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="bg-[#25D366] text-white px-4 py-2 flex items-center gap-2 font-medium text-sm hover:bg-[#128C7E] transition-colors"
+                          >
+                            <ShoppingCart className="w-4 h-4" /> Buy Now
+                          </a>
+                        </div>
                       </div>
                       <CardContent className="p-4">
-                        <span className="inline-block bg-[#C5A059]/10 text-[#C5A059] px-2 py-0.5 text-xs font-semibold tracking-wider uppercase mb-2">
-                          {pub.publication_type === "edited_volume" ? "Edited Volume" : pub.publication_type === "book" ? "Book" : "Research"}
+                        <span className={`inline-block px-2 py-0.5 text-xs font-semibold tracking-wider uppercase mb-2 ${
+                          pub.publication_type === "book" ? "bg-blue-100 text-blue-700" : "bg-[#C5A059]/10 text-[#C5A059]"
+                        }`}>
+                          {pub.publication_type === "edited_volume" ? "Edited Volume" : "Book"}
                         </span>
                         <h3 className="font-serif text-sm font-medium text-slate-900 mb-2 line-clamp-2 group-hover:text-[#C5A059] transition-colors leading-tight">
                           {pub.title}
@@ -240,10 +294,19 @@ export default function Publications() {
                           <User className="w-3 h-3 mt-0.5 flex-shrink-0" />
                           <span className="line-clamp-2">{pub.author}</span>
                         </div>
-                        <div className="flex items-center gap-1 text-slate-400 text-xs">
+                        <div className="flex items-center gap-1 text-slate-400 text-xs mb-3">
                           <Building2 className="w-3 h-3" />
                           <span className="truncate">{pub.publisher.replace(" Publication House", "")}</span>
                         </div>
+                        {/* Buy Now Button */}
+                        <a 
+                          href={WHATSAPP_CATALOGUE} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="w-full bg-[#25D366] text-white py-2 flex items-center justify-center gap-2 text-xs font-medium hover:bg-[#128C7E] transition-colors"
+                        >
+                          <ShoppingCart className="w-3 h-3" /> Buy Now
+                        </a>
                       </CardContent>
                     </Card>
                   ))}
@@ -252,14 +315,39 @@ export default function Publications() {
             </TabsContent>
           </Tabs>
 
-          {/* Back to All Publications */}
           {companyFilter && filtered.length > 0 && (
             <div className="text-center mt-12">
-              <Button onClick={clearCompanyFilter} variant="outline" className="rounded-none border-slate-300">
-                View All Publications
-              </Button>
+              <Button onClick={clearCompanyFilter} variant="outline" className="rounded-none border-slate-300">View All Publications</Button>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* For More / Contact Section */}
+      <section className="py-16 bg-[#C5A059]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div>
+              <h3 className="font-serif text-2xl font-medium text-slate-950 mb-2">Need More Information?</h3>
+              <p className="text-slate-800">Contact us directly for bulk orders, custom requests, or any inquiries.</p>
+            </div>
+            <div className="flex gap-4">
+              <a 
+                href={WHATSAPP_CATALOGUE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#25D366] text-white px-6 py-3 flex items-center gap-2 font-medium hover:bg-[#128C7E] transition-colors"
+              >
+                <MessageCircle className="w-5 h-5" /> WhatsApp Catalogue
+              </a>
+              <Link 
+                to="/contact"
+                className="bg-slate-950 text-white px-6 py-3 flex items-center gap-2 font-medium hover:bg-slate-800 transition-colors"
+              >
+                Contact Us <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
