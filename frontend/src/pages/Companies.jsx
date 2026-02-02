@@ -3,27 +3,11 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Scale, GraduationCap, Globe, Award, ArrowRight } from "lucide-react";
+import { BookOpen, ArrowRight } from "lucide-react";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
-
-const iconMap = {
-  BookOpen: BookOpen,
-  Scale: Scale,
-  GraduationCap: GraduationCap,
-  Globe: Globe,
-  Award: Award,
-};
-
-const colorMap = {
-  BookOpen: "bg-amber-50 text-amber-700",
-  Scale: "bg-blue-50 text-blue-700",
-  GraduationCap: "bg-emerald-50 text-emerald-700",
-  Globe: "bg-sky-50 text-sky-700",
-  Award: "bg-violet-50 text-violet-700",
-};
 
 export default function Companies() {
   const [companies, setCompanies] = useState([]);
@@ -43,6 +27,17 @@ export default function Companies() {
     fetchCompanies();
   }, []);
 
+  const getColorClass = (index) => {
+    const colors = [
+      "bg-amber-50 text-amber-700",
+      "bg-blue-50 text-blue-700",
+      "bg-emerald-50 text-emerald-700",
+      "bg-sky-50 text-sky-700",
+      "bg-violet-50 text-violet-700",
+    ];
+    return colors[index % colors.length];
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen pt-20 flex items-center justify-center">
@@ -56,7 +51,6 @@ export default function Companies() {
 
   return (
     <div data-testid="companies-page" className="min-h-screen pt-20">
-      {/* Hero Section */}
       <section className="py-20 bg-slate-950 relative overflow-hidden">
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -75,105 +69,97 @@ export default function Companies() {
               Five Pillars of<span className="text-[#C5A059]"> Excellence</span>
             </h1>
             <p className="text-slate-400 text-lg leading-relaxed">
-              Each of our publishing houses brings unique expertise and focus, collectively
-              covering the entire spectrum of academic publishing needs.
+              Each publishing house brings unique expertise, covering the spectrum of academic publishing needs.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Companies Grid */}
       <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-8">
-            {companies.map((company, index) => {
-              const IconComponent = iconMap[company.icon] || BookOpen;
-              const colorClass = colorMap[company.icon] || "bg-slate-100 text-slate-700";
-              
-              return (
-                <motion.div
-                  key={company.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+            {companies.map((company, index) => (
+              <motion.div
+                key={company.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+              >
+                <Card
+                  className="bg-white border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 rounded-none overflow-hidden"
+                  data-testid={`company-row-${company.slug}`}
                 >
-                  <Card
-                    className="bg-white border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 rounded-none overflow-hidden"
-                    data-testid={`company-row-${company.slug}`}
-                  >
-                    <CardContent className="p-0">
-                      <div className="grid lg:grid-cols-12 gap-0">
-                        <div className="lg:col-span-4 p-8 border-b lg:border-b-0 lg:border-r border-slate-100">
-                          <div className={`w-16 h-16 ${colorClass} flex items-center justify-center mb-6`}>
-                            <IconComponent className="w-8 h-8" />
-                          </div>
-                          <span
-                            className={`inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase mb-4 ${
-                              company.scope.includes("International")
-                                ? "bg-[#C5A059]/10 text-[#C5A059]"
-                                : "bg-slate-100 text-slate-600"
-                            }`}
-                          >
-                            {company.scope}
-                          </span>
-                          <h3 className="font-serif text-2xl font-medium text-slate-900 mb-2">
-                            {company.name}
-                          </h3>
-                          <p className="text-[#C5A059] font-medium text-sm">
-                            {company.focus}
-                          </p>
+                  <CardContent className="p-0">
+                    <div className="grid lg:grid-cols-12 gap-0">
+                      <div className="lg:col-span-4 p-8 border-b lg:border-b-0 lg:border-r border-slate-100">
+                        <div className={`w-16 h-16 ${getColorClass(index)} flex items-center justify-center mb-6`}>
+                          <BookOpen className="w-8 h-8" />
                         </div>
+                        <span
+                          className={`inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase mb-4 ${
+                            company.scope.includes("International")
+                              ? "bg-[#C5A059]/10 text-[#C5A059]"
+                              : "bg-slate-100 text-slate-600"
+                          }`}
+                        >
+                          {company.scope}
+                        </span>
+                        <h3 className="font-serif text-2xl font-medium text-slate-900 mb-2">
+                          {company.name}
+                        </h3>
+                        <p className="text-[#C5A059] font-medium text-sm">
+                          {company.focus}
+                        </p>
+                      </div>
 
-                        <div className="lg:col-span-8 p-8 flex flex-col justify-between">
-                          <div>
-                            <p className="text-slate-600 leading-relaxed mb-6">
-                              {company.description}
+                      <div className="lg:col-span-8 p-8 flex flex-col justify-between">
+                        <div>
+                          <p className="text-slate-600 leading-relaxed mb-6">
+                            {company.description}
+                          </p>
+                          <div className="mb-6">
+                            <p className="text-xs text-slate-500 uppercase tracking-wider mb-3">
+                              Manuscripts Accepted
                             </p>
-                            <div className="mb-6">
-                              <p className="text-xs text-slate-500 uppercase tracking-wider mb-3">
-                                Manuscripts Accepted
-                              </p>
-                              <div className="flex flex-wrap gap-2">
-                                {company.manuscripts_accepted.map((item) => (
-                                  <span key={item} className="bg-slate-100 text-slate-700 px-3 py-1 text-sm">
-                                    {item}
-                                  </span>
-                                ))}
-                              </div>
+                            <div className="flex flex-wrap gap-2">
+                              {company.manuscripts_accepted.map((item) => (
+                                <span key={item} className="bg-slate-100 text-slate-700 px-3 py-1 text-sm">
+                                  {item}
+                                </span>
+                              ))}
                             </div>
                           </div>
-                          <div className="flex gap-4">
-                            <Button
-                              asChild
-                              data-testid={`company-learn-more-${company.slug}`}
-                              className="bg-slate-900 hover:bg-slate-800 text-white rounded-none px-6 py-4 text-sm font-medium tracking-wider uppercase"
-                            >
-                              <Link to={`/companies/${company.slug}`}>
-                                Learn More
-                                <ArrowRight className="ml-2 w-4 h-4" />
-                              </Link>
-                            </Button>
-                            <Button
-                              asChild
-                              variant="outline"
-                              className="border-slate-300 text-slate-700 hover:border-slate-900 rounded-none px-6 py-4 text-sm font-medium tracking-wider uppercase"
-                            >
-                              <Link to="/submission">Submit Manuscript</Link>
-                            </Button>
-                          </div>
+                        </div>
+                        <div className="flex gap-4">
+                          <Button
+                            asChild
+                            data-testid={`company-learn-more-${company.slug}`}
+                            className="bg-slate-900 hover:bg-slate-800 text-white rounded-none px-6 py-4 text-sm font-medium tracking-wider uppercase"
+                          >
+                            <Link to={`/companies/${company.slug}`}>
+                              Learn More
+                              <ArrowRight className="ml-2 w-4 h-4" />
+                            </Link>
+                          </Button>
+                          <Button
+                            asChild
+                            variant="outline"
+                            className="border-slate-300 text-slate-700 hover:border-slate-900 rounded-none px-6 py-4 text-sm font-medium tracking-wider uppercase"
+                          >
+                            <Link to="/submission">Submit Manuscript</Link>
+                          </Button>
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-24 bg-slate-950">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
@@ -189,8 +175,7 @@ export default function Companies() {
               Find the Right Publisher
             </h2>
             <p className="text-slate-400 text-lg mb-10 max-w-2xl mx-auto">
-              Not sure which publishing house suits your manuscript? Contact us and our
-              team will guide you to the most appropriate platform.
+              Contact us and our team will guide you to the most appropriate platform.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button
@@ -202,13 +187,6 @@ export default function Companies() {
                   Contact Us
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="bg-transparent border-slate-600 text-white hover:bg-white/10 hover:border-white rounded-none px-8 py-6 text-sm font-medium tracking-widest uppercase"
-              >
-                <Link to="/submission">Submission Guidelines</Link>
               </Button>
             </div>
           </motion.div>
