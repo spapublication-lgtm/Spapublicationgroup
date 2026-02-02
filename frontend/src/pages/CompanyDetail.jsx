@@ -127,6 +127,9 @@ export default function CompanyDetail() {
               <Link to="/submission">Submit Manuscript <ArrowRight className="ml-2 w-4 h-4" /></Link>
             </Button>
             <Button asChild variant="outline" className="border-slate-300 text-slate-700 rounded-none px-8 py-6">
+              <Link to={`/publications?company=${slug}`}>View Our Publications</Link>
+            </Button>
+            <Button asChild variant="outline" className="border-slate-300 text-slate-700 rounded-none px-8 py-6">
               <Link to="/contact">Contact Us</Link>
             </Button>
           </div>
