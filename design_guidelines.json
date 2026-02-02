@@ -1,0 +1,140 @@
+{
+  "brand_identity": {
+    "name": "SPA Publication Group",
+    "core_values": ["Academic Excellence", "Legal Authority", "Global Credibility", "Professionalism"],
+    "tone": "Formal, Authoritative, Scholarly, Trustworthy, Timeless",
+    "archetype": "The Sage / The Ruler",
+    "visual_style": "Modern Scholarly - A blend of classic print aesthetics (serifs, whitespace) with modern digital precision (grids, micro-interactions)."
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Cormorant Garamond, serif",
+      "body": "Manrope, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "installation": "Import from Google Fonts: https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap",
+    "usage_rules": {
+      "h1": "font-serif text-5xl md:text-7xl font-medium tracking-tight leading-[1.1] text-primary",
+      "h2": "font-serif text-4xl md:text-5xl font-normal tracking-tight text-primary mb-6",
+      "h3": "font-serif text-2xl md:text-3xl font-medium text-primary mb-4",
+      "body_large": "font-sans text-lg md:text-xl text-muted-foreground leading-relaxed",
+      "body_default": "font-sans text-base text-muted-foreground leading-relaxed",
+      "caption": "font-sans text-sm font-semibold tracking-widest uppercase text-accent"
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "name": "Deep Navy",
+        "hex": "#020617",
+        "tailwind": "bg-slate-950",
+        "text": "text-slate-950"
+      },
+      "secondary": {
+        "name": "Academic Gold",
+        "hex": "#C5A059",
+        "tailwind": "bg-[#C5A059]",
+        "text": "text-[#C5A059]"
+      },
+      "background": {
+        "name": "Paper White",
+        "hex": "#F8FAFC",
+        "tailwind": "bg-slate-50"
+      },
+      "surface": {
+        "name": "Pure White",
+        "hex": "#FFFFFF",
+        "tailwind": "bg-white"
+      },
+      "muted": {
+        "name": "Cool Grey",
+        "hex": "#64748B",
+        "tailwind": "text-slate-500"
+      }
+    },
+    "usage": {
+      "body_bg": "bg-slate-50",
+      "text_primary": "text-slate-950",
+      "text_secondary": "text-slate-600",
+      "accent_elements": "text-[#C5A059] or border-[#C5A059]",
+      "header_bg": "bg-slate-950",
+      "header_text": "text-slate-50",
+      "footer_bg": "bg-slate-950",
+      "footer_text": "text-slate-300"
+    }
+  },
+  "layout_system": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "spacing": {
+      "section_padding": "py-20 md:py-32",
+      "element_gap": "gap-8 md:gap-12"
+    },
+    "grid_strategy": {
+      "bento_grid": "grid grid-cols-1 md:grid-cols-3 gap-6",
+      "hero_split": "grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-slate-900 text-white hover:bg-slate-800 rounded-none px-8 py-6 text-sm font-medium tracking-widest uppercase transition-all duration-300",
+      "secondary": "bg-transparent border border-slate-200 text-slate-900 hover:border-slate-900 hover:bg-slate-50 rounded-none px-8 py-6 text-sm font-medium tracking-widest uppercase transition-all duration-300",
+      "ghost": "text-slate-600 hover:text-[#C5A059] font-medium transition-colors"
+    },
+    "cards": {
+      "style": "bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 group relative overflow-hidden",
+      "hover_effect": "hover:-translate-y-1 hover:border-[#C5A059]/30"
+    },
+    "inputs": {
+      "style": "rounded-none border-slate-200 focus:border-[#C5A059] focus:ring-[#C5A059]/20 bg-white/50 backdrop-blur-sm"
+    },
+    "navigation": {
+      "wrapper": "fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100",
+      "link": "text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+    }
+  },
+  "assets": {
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1708548172199-72f7796d4206?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzZ8MHwxfHNlYXJjaHwxfHxjbGFzc2ljJTIwbGlicmFyeSUyMGJvb2tzJTIwc2hlbHZlcyUyMGRhcmslMjBhY2FkZW1pYXxlbnwwfHx8fDE3NzAwMzY5Njh8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Classic academic library shelves",
+      "usage": "Hero section background or split layout image"
+    },
+    "about_image": {
+      "url": "https://images.unsplash.com/photo-1758518731468-98e90ffd7430?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBvZmZpY2UlMjBtZWV0aW5nJTIwZGl2ZXJzZSUyMHByb2Zlc3Npb25hbHN8ZW58MHx8fHwxNzcwMDM2OTQ5fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Diverse professionals in modern office",
+      "usage": "About Us section or Team intro"
+    },
+    "texture_bg": {
+      "url": "https://images.unsplash.com/photo-1646310997905-14eb66d1e04a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGdvbGQlMjBuYXZ5JTIwYmx1ZSUyMGdlb21ldHJpYyUyMHRleHR1cmV8ZW58MHx8fHwxNzcwMDM2OTUzfDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Abstract blue and gold texture",
+      "usage": "Subtle background for 'Our Companies' or 'Stats' section"
+    }
+  },
+  "motion": {
+    "library": "framer-motion",
+    "guidelines": {
+      "page_load": "initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: 'easeOut' }}",
+      "stagger": "staggerChildren: 0.1",
+      "hover_lift": "whileHover={{ y: -5 }} transition={{ duration: 0.2 }}",
+      "scroll_reveal": "viewport={{ once: true, margin: '-100px' }}"
+    }
+  },
+  "universal_guidelines": {
+    "anti_ai_rules": [
+      "NO generic centered layouts. Use asymmetry.",
+      "NO 'Inter' font for headings. Use Cormorant Garamond.",
+      "NO full-width gradients. Use subtle textures or solid blocks.",
+      "NO default Shadcn styling. Customize borders (rounded-none) and shadows.",
+      "Use 2x more whitespace than you think is necessary."
+    ],
+    "accessibility": [
+      "Ensure text contrast ratio > 4.5:1",
+      "All images must have alt text",
+      "Interactive elements must have focus states",
+      "Use semantic HTML (section, article, main, nav)"
+    ],
+    "testing": [
+      "Add data-testid to all interactive elements (e.g., data-testid='submit-manuscript-btn')"
+    ]
+  },
+  "instructions_to_main_agent": "You are building the frontend for SPA Publication Group. Follow the JSON structure strictly. Use the provided image URLs. Implement the 'Modern Scholarly' aesthetic by combining the Serif headings with the clean Sans body. Use the 'Deep Navy' and 'Academic Gold' colors to create a sense of prestige. Ensure the 'Our Companies' section uses a Bento Grid layout. The 'Publications' section should be clean and filterable. Use 'sonner' for toasts and 'lucide-react' for icons."
+}
