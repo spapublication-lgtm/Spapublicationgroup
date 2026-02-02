@@ -6,6 +6,53 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BookOpen, BookMarked, FileText, ArrowRight, User, Building2 } from "lucide-react";
 
 const publications = [
+  // New books
+  {
+    id: "6",
+    title: "Realities Unmasked: AI, Intimacy and the Absurd Digital World",
+    author: "Dr. Sovana Mukherjee",
+    publication_type: "edited_volume",
+    publisher: "Legal Luminaries Publication House",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/vwzvkts8_IMG-20251220-WA0002.jpg",
+  },
+  {
+    id: "7",
+    title: "Citizenship, Constitution and Controversy: The CAA Perspective",
+    author: "Adv. G. Raja Kumari, Adv. Amandeep Kaur",
+    publication_type: "edited_volume",
+    publisher: "Legal Luminaries Publication House",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/1ln9dlgj_IMG-20250610-WA0007.jpg",
+  },
+  {
+    id: "8",
+    title: "Indian Constitution: Concepts, Theories and Critique",
+    author: "Adv. G Raja Kumari, Adv. Amandeep Kaur, Adv. Sukhmandeep Kaur, Mr. Prasanna Kannan",
+    publication_type: "edited_volume",
+    publisher: "Legal Luminaries Publication House",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/vgcqe2dx_IMG-20250612-WA0003.jpg",
+  },
+  {
+    id: "9",
+    title: "Lex Silentia: Interpreting the Unspoken Bhartiya Nyaya Sanhita, 2023",
+    author: "Adv. Amandeep Kaur",
+    publication_type: "edited_volume",
+    publisher: "Legal Luminaries Publication House",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/qnac6o8y_IMG-20250603-WA0017.jpg",
+  },
+  {
+    id: "10",
+    title: "Shattered Ceilings: Women, Law & Social Change",
+    author: "Dr. R.N Singh, Dr. Pawan Kumar Srivastava",
+    publication_type: "edited_volume",
+    publisher: "Legal Luminaries Publication House",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/a86vzj58_IMG-20250412-WA0005.jpg",
+  },
+  // Previous books
   {
     id: "1",
     title: "The Constitution as a Shield: Advancing Women's Rights",
@@ -70,7 +117,7 @@ export default function Publications() {
               <span className="text-[#C5A059] text-sm font-medium tracking-widest uppercase">Our Catalog</span>
             </div>
             <h1 className="font-serif text-5xl sm:text-6xl font-medium text-white mb-6">Publications</h1>
-            <p className="text-slate-400 text-lg">Explore our collection of academic publications from Legal Luminaries Publication House and other imprints.</p>
+            <p className="text-slate-400 text-lg">Explore our collection of {publications.length} academic publications from Legal Luminaries Publication House.</p>
           </div>
         </div>
       </section>
@@ -81,13 +128,13 @@ export default function Publications() {
             <div className="flex justify-center mb-12">
               <TabsList className="bg-white border p-1 rounded-none">
                 <TabsTrigger value="all" data-testid="tab-all" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
-                  <BookMarked className="w-4 h-4 mr-2" /> All
+                  <BookMarked className="w-4 h-4 mr-2" /> All ({publications.length})
                 </TabsTrigger>
                 <TabsTrigger value="book" data-testid="tab-book" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
                   <BookOpen className="w-4 h-4 mr-2" /> Books
                 </TabsTrigger>
                 <TabsTrigger value="edited_volume" data-testid="tab-edited" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
-                  <FileText className="w-4 h-4 mr-2" /> Edited Volumes
+                  <FileText className="w-4 h-4 mr-2" /> Edited Volumes ({publications.filter(p => p.publication_type === 'edited_volume').length})
                 </TabsTrigger>
                 <TabsTrigger value="research" data-testid="tab-research" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
                   <FileText className="w-4 h-4 mr-2" /> Research
@@ -103,7 +150,7 @@ export default function Publications() {
                   <p className="text-slate-500">Publications in this category will be added soon.</p>
                 </div>
               ) : (
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                   {filtered.map((pub) => (
                     <Card key={pub.id} className="bg-white border rounded-none overflow-hidden group hover:shadow-xl transition-all" data-testid={`publication-card-${pub.id}`}>
                       <div className="aspect-[3/4] overflow-hidden bg-slate-100">
