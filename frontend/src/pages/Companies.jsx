@@ -121,6 +121,9 @@ function CompanyRow({ slug, name, focus, scope, logoUrl, description, manuscript
                 <Link to={`/companies/${slug}`}>Learn More <ArrowRight className="ml-2 w-4 h-4" /></Link>
               </Button>
               <Button asChild variant="outline" className="border-slate-300 text-slate-700 rounded-none px-6 py-4">
+                <Link to={`/publications?company=${slug}`}>View Publications</Link>
+              </Button>
+              <Button asChild variant="outline" className="border-slate-300 text-slate-700 rounded-none px-6 py-4">
                 <Link to="/submission">Submit Manuscript</Link>
               </Button>
             </div>
