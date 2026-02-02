@@ -1,31 +1,44 @@
 import { useParams, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { BookOpen, ArrowRight, CheckCircle, FileText, Send } from "lucide-react";
-import axios from "axios";
 
-const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+const companies = {
+  "spa-publications": {
+    name: "SPA Publications",
+    focus: "Authored Books & Research Books",
+    scope: "National Publication",
+    description: "SPA Publications specializes in publishing authored books and research monographs across diverse academic disciplines. We are committed to promoting original scholarly work that contributes to the advancement of knowledge at the national level.",
+  },
+  "legal-luminaries": {
+    name: "Legal Luminaries Publication House",
+    focus: "Edited Books Across All Subjects",
+    scope: "National Publication",
+    description: "Legal Luminaries Publication House is dedicated to publishing high-quality edited volumes featuring contributions from multiple scholars. We cover all academic subjects with a special emphasis on legal studies.",
+  },
+  "intellect-jurists": {
+    name: "Intellect Jurists Publishers",
+    focus: "Textbooks for All Academic Subjects",
+    scope: "National Publication",
+    description: "Intellect Jurists Publishers focuses on developing comprehensive textbooks for students and educators across all academic subjects. Our publications are designed to meet curriculum requirements.",
+  },
+  "blue-globe-international": {
+    name: "Blue Globe International",
+    focus: "All Types of International Publications",
+    scope: "International Publication",
+    description: "Blue Globe International is our flagship international publishing division, handling all types of academic publications for the global market. We connect scholars worldwide.",
+  },
+  "aquitas-international": {
+    name: "Aquitas International",
+    focus: "Global & International Academic Publications",
+    scope: "International Publication",
+    description: "Aquitas International specializes in global academic publications with a focus on equity, fairness, and scholarly excellence. We publish works that address international issues.",
+  },
+};
 
 export default function CompanyDetail() {
   const { slug } = useParams();
-  const [company, setCompany] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios.get(`${API}/companies/${slug}`)
-      .then(res => setCompany(res.data))
-      .catch(err => console.error(err))
-      .finally(() => setLoading(false));
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen pt-20 flex items-center justify-center">
-        <div className="w-16 h-16 border-4 border-[#C5A059] border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
-  }
+  const company = companies[slug];
 
   if (!company) {
     return (
@@ -40,6 +53,8 @@ export default function CompanyDetail() {
     );
   }
 
+  const isInternational = company.scope.includes("International");
+
   return (
     <div data-testid={`company-detail-${slug}`} className="min-h-screen pt-20">
       <section className="py-20 bg-slate-950">
@@ -52,7 +67,7 @@ export default function CompanyDetail() {
               <BookOpen className="w-12 h-12" />
             </div>
             <div>
-              <span className={`inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase mb-4 ${company.scope.includes("International") ? "bg-[#C5A059]/20 text-[#C5A059]" : "bg-slate-800 text-slate-300"}`}>
+              <span className={`inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase mb-4 ${isInternational ? "bg-[#C5A059]/20 text-[#C5A059]" : "bg-slate-800 text-slate-300"}`}>
                 {company.scope}
               </span>
               <h1 className="font-serif text-4xl sm:text-5xl font-medium text-white mb-4">{company.name}</h1>
@@ -74,12 +89,10 @@ export default function CompanyDetail() {
               <CardContent className="p-8">
                 <h3 className="font-serif text-xl font-medium text-slate-900 mb-6">Manuscripts We Accept</h3>
                 <ul className="space-y-3">
-                  {company.manuscripts_accepted.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-[#C5A059] mt-0.5" />
-                      <span className="text-slate-600">{item}</span>
-                    </li>
-                  ))}
+                  <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-[#C5A059] mt-0.5" /><span className="text-slate-600">Research Monographs</span></li>
+                  <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-[#C5A059] mt-0.5" /><span className="text-slate-600">Authored Academic Books</span></li>
+                  <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-[#C5A059] mt-0.5" /><span className="text-slate-600">Scholarly Treatises</span></li>
+                  <li className="flex items-start gap-3"><CheckCircle className="w-5 h-5 text-[#C5A059] mt-0.5" /><span className="text-slate-600">Subject-specific Studies</span></li>
                 </ul>
               </CardContent>
             </Card>
@@ -94,12 +107,12 @@ export default function CompanyDetail() {
             <div className="w-16 h-[3px] bg-[#C5A059] mx-auto" />
           </div>
           <div className="grid md:grid-cols-3 gap-6">
-            {["Rigorous peer review", "Professional editing", "High-quality printing", "ISBN allocation", "Wide distribution", "Marketing support"].map((feature, idx) => (
-              <div key={idx} className="bg-white p-6 border border-slate-100">
-                <FileText className="w-8 h-8 text-[#C5A059] mb-4" />
-                <p className="text-slate-700 font-medium">{feature}</p>
-              </div>
-            ))}
+            <div className="bg-white p-6 border border-slate-100"><FileText className="w-8 h-8 text-[#C5A059] mb-4" /><p className="text-slate-700 font-medium">Rigorous peer review</p></div>
+            <div className="bg-white p-6 border border-slate-100"><FileText className="w-8 h-8 text-[#C5A059] mb-4" /><p className="text-slate-700 font-medium">Professional editing</p></div>
+            <div className="bg-white p-6 border border-slate-100"><FileText className="w-8 h-8 text-[#C5A059] mb-4" /><p className="text-slate-700 font-medium">High-quality printing</p></div>
+            <div className="bg-white p-6 border border-slate-100"><FileText className="w-8 h-8 text-[#C5A059] mb-4" /><p className="text-slate-700 font-medium">ISBN allocation</p></div>
+            <div className="bg-white p-6 border border-slate-100"><FileText className="w-8 h-8 text-[#C5A059] mb-4" /><p className="text-slate-700 font-medium">Wide distribution</p></div>
+            <div className="bg-white p-6 border border-slate-100"><FileText className="w-8 h-8 text-[#C5A059] mb-4" /><p className="text-slate-700 font-medium">Marketing support</p></div>
           </div>
         </div>
       </section>
