@@ -11,65 +11,64 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-const companies = [
-  {
-    name: "SPA Publications",
-    slug: "spa-publications",
-    focus: "Authored Books & Research Books",
-    scope: "National Publication",
-    description:
-      "SPA Publications specializes in publishing authored books and research monographs across diverse academic disciplines. We are committed to promoting original scholarly work that contributes to the advancement of knowledge at the national level.",
-    icon: BookOpen,
-    color: "bg-amber-50 text-amber-700 border-amber-200",
-    manuscripts: ["Research Monographs", "Authored Academic Books", "Scholarly Treatises"],
-  },
-  {
-    name: "Legal Luminaries Publication House",
-    slug: "legal-luminaries",
-    focus: "Edited Books Across All Subjects",
-    scope: "National Publication",
-    description:
-      "Legal Luminaries Publication House is dedicated to publishing high-quality edited volumes featuring contributions from multiple scholars. We cover all academic subjects with a special emphasis on legal studies and interdisciplinary research.",
-    icon: Scale,
-    color: "bg-blue-50 text-blue-700 border-blue-200",
-    manuscripts: ["Edited Volumes", "Multi-author Collections", "Conference Proceedings"],
-  },
-  {
-    name: "Intellect Jurists Publishers",
-    slug: "intellect-jurists",
-    focus: "Textbooks for All Academic Subjects",
-    scope: "National Publication",
-    description:
-      "Intellect Jurists Publishers focuses on developing comprehensive textbooks for students and educators across all academic subjects. Our publications are designed to meet curriculum requirements while maintaining high academic standards.",
-    icon: GraduationCap,
-    color: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    manuscripts: ["Academic Textbooks", "Study Guides", "Course Materials"],
-  },
-  {
-    name: "Blue Globe International",
-    slug: "blue-globe-international",
-    focus: "All Types of International Publications",
-    scope: "International Publication",
-    description:
-      "Blue Globe International is our flagship international publishing division, handling all types of academic publications for the global market. We connect scholars worldwide and facilitate the dissemination of knowledge across borders.",
-    icon: Globe,
-    color: "bg-sky-50 text-sky-700 border-sky-200",
-    manuscripts: ["International Research Papers", "Global Collaborative Works", "Cross-cultural Studies"],
-  },
-  {
-    name: "Aquitas International",
-    slug: "aquitas-international",
-    focus: "Global & International Academic Publications",
-    scope: "International Publication",
-    description:
-      "Aquitas International specializes in global academic publications with a focus on equity, fairness, and scholarly excellence. We publish works that address international issues and promote academic discourse across continents.",
-    icon: Award,
-    color: "bg-violet-50 text-violet-700 border-violet-200",
-    manuscripts: ["International Journals", "Global Academic Books", "Transnational Research"],
-  },
-];
+const getCompanyData = () => {
+  return [
+    {
+      name: "SPA Publications",
+      slug: "spa-publications",
+      focus: "Authored Books & Research Books",
+      scope: "National Publication",
+      description: "SPA Publications specializes in publishing authored books and research monographs across diverse academic disciplines. We are committed to promoting original scholarly work that contributes to the advancement of knowledge at the national level.",
+      icon: BookOpen,
+      color: "bg-amber-50 text-amber-700 border-amber-200",
+      manuscripts: ["Research Monographs", "Authored Academic Books", "Scholarly Treatises"],
+    },
+    {
+      name: "Legal Luminaries Publication House",
+      slug: "legal-luminaries",
+      focus: "Edited Books Across All Subjects",
+      scope: "National Publication",
+      description: "Legal Luminaries Publication House is dedicated to publishing high-quality edited volumes featuring contributions from multiple scholars. We cover all academic subjects with a special emphasis on legal studies and interdisciplinary research.",
+      icon: Scale,
+      color: "bg-blue-50 text-blue-700 border-blue-200",
+      manuscripts: ["Edited Volumes", "Multi-author Collections", "Conference Proceedings"],
+    },
+    {
+      name: "Intellect Jurists Publishers",
+      slug: "intellect-jurists",
+      focus: "Textbooks for All Academic Subjects",
+      scope: "National Publication",
+      description: "Intellect Jurists Publishers focuses on developing comprehensive textbooks for students and educators across all academic subjects. Our publications are designed to meet curriculum requirements while maintaining high academic standards.",
+      icon: GraduationCap,
+      color: "bg-emerald-50 text-emerald-700 border-emerald-200",
+      manuscripts: ["Academic Textbooks", "Study Guides", "Course Materials"],
+    },
+    {
+      name: "Blue Globe International",
+      slug: "blue-globe-international",
+      focus: "All Types of International Publications",
+      scope: "International Publication",
+      description: "Blue Globe International is our flagship international publishing division, handling all types of academic publications for the global market. We connect scholars worldwide and facilitate the dissemination of knowledge across borders.",
+      icon: Globe,
+      color: "bg-sky-50 text-sky-700 border-sky-200",
+      manuscripts: ["International Research Papers", "Global Collaborative Works", "Cross-cultural Studies"],
+    },
+    {
+      name: "Aquitas International",
+      slug: "aquitas-international",
+      focus: "Global & International Academic Publications",
+      scope: "International Publication",
+      description: "Aquitas International specializes in global academic publications with a focus on equity, fairness, and scholarly excellence. We publish works that address international issues and promote academic discourse across continents.",
+      icon: Award,
+      color: "bg-violet-50 text-violet-700 border-violet-200",
+      manuscripts: ["International Journals", "Global Academic Books", "Transnational Research"],
+    },
+  ];
+};
 
 export default function Companies() {
+  const companies = getCompanyData();
+
   return (
     <div data-testid="companies-page" className="min-h-screen pt-20">
       {/* Hero Section */}
@@ -112,91 +111,90 @@ export default function Companies() {
       <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-8">
-            {companies.map((company, index) => (
-              <motion.div
-                key={company.slug}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <Card
-                  className="bg-white border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 rounded-none overflow-hidden"
-                  data-testid={`company-row-${company.slug}`}
+            {companies.map((company, index) => {
+              const IconComponent = company.icon;
+              return (
+                <motion.div
+                  key={company.slug}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <CardContent className="p-0">
-                    <div className="grid lg:grid-cols-12 gap-0">
-                      {/* Icon & Basic Info */}
-                      <div className="lg:col-span-4 p-8 border-b lg:border-b-0 lg:border-r border-slate-100">
-                        <div
-                          className={`w-16 h-16 ${company.color} flex items-center justify-center mb-6`}
-                        >
-                          <company.icon className="w-8 h-8" />
-                        </div>
-                        <span
-                          className={`inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase mb-4 ${
-                            company.scope.includes("International")
-                              ? "bg-[#C5A059]/10 text-[#C5A059]"
-                              : "bg-slate-100 text-slate-600"
-                          }`}
-                        >
-                          {company.scope}
-                        </span>
-                        <h3 className="font-serif text-2xl font-medium text-slate-900 mb-2">
-                          {company.name}
-                        </h3>
-                        <p className="text-[#C5A059] font-medium text-sm">
-                          {company.focus}
-                        </p>
-                      </div>
-
-                      {/* Description & CTA */}
-                      <div className="lg:col-span-8 p-8 flex flex-col justify-between">
-                        <div>
-                          <p className="text-slate-600 leading-relaxed mb-6">
-                            {company.description}
+                  <Card
+                    className="bg-white border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 rounded-none overflow-hidden"
+                    data-testid={`company-row-${company.slug}`}
+                  >
+                    <CardContent className="p-0">
+                      <div className="grid lg:grid-cols-12 gap-0">
+                        <div className="lg:col-span-4 p-8 border-b lg:border-b-0 lg:border-r border-slate-100">
+                          <div className={`w-16 h-16 ${company.color} flex items-center justify-center mb-6`}>
+                            <IconComponent className="w-8 h-8" />
+                          </div>
+                          <span
+                            className={`inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase mb-4 ${
+                              company.scope.includes("International")
+                                ? "bg-[#C5A059]/10 text-[#C5A059]"
+                                : "bg-slate-100 text-slate-600"
+                            }`}
+                          >
+                            {company.scope}
+                          </span>
+                          <h3 className="font-serif text-2xl font-medium text-slate-900 mb-2">
+                            {company.name}
+                          </h3>
+                          <p className="text-[#C5A059] font-medium text-sm">
+                            {company.focus}
                           </p>
-                          <div className="mb-6">
-                            <p className="text-xs text-slate-500 uppercase tracking-wider mb-3">
-                              Manuscripts Accepted
+                        </div>
+
+                        <div className="lg:col-span-8 p-8 flex flex-col justify-between">
+                          <div>
+                            <p className="text-slate-600 leading-relaxed mb-6">
+                              {company.description}
                             </p>
-                            <div className="flex flex-wrap gap-2">
-                              {company.manuscripts.map((item) => (
-                                <span
-                                  key={item}
-                                  className="bg-slate-100 text-slate-700 px-3 py-1 text-sm"
-                                >
-                                  {item}
-                                </span>
-                              ))}
+                            <div className="mb-6">
+                              <p className="text-xs text-slate-500 uppercase tracking-wider mb-3">
+                                Manuscripts Accepted
+                              </p>
+                              <div className="flex flex-wrap gap-2">
+                                {company.manuscripts.map((item) => (
+                                  <span
+                                    key={item}
+                                    className="bg-slate-100 text-slate-700 px-3 py-1 text-sm"
+                                  >
+                                    {item}
+                                  </span>
+                                ))}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="flex gap-4">
-                          <Button
-                            asChild
-                            data-testid={`company-learn-more-${company.slug}`}
-                            className="bg-slate-900 hover:bg-slate-800 text-white rounded-none px-6 py-4 text-sm font-medium tracking-wider uppercase"
-                          >
-                            <Link to={`/companies/${company.slug}`}>
-                              Learn More
-                              <ArrowRight className="ml-2 w-4 h-4" />
-                            </Link>
-                          </Button>
-                          <Button
-                            asChild
-                            variant="outline"
-                            className="border-slate-300 text-slate-700 hover:border-slate-900 rounded-none px-6 py-4 text-sm font-medium tracking-wider uppercase"
-                          >
-                            <Link to="/submission">Submit Manuscript</Link>
-                          </Button>
+                          <div className="flex gap-4">
+                            <Button
+                              asChild
+                              data-testid={`company-learn-more-${company.slug}`}
+                              className="bg-slate-900 hover:bg-slate-800 text-white rounded-none px-6 py-4 text-sm font-medium tracking-wider uppercase"
+                            >
+                              <Link to={`/companies/${company.slug}`}>
+                                Learn More
+                                <ArrowRight className="ml-2 w-4 h-4" />
+                              </Link>
+                            </Button>
+                            <Button
+                              asChild
+                              variant="outline"
+                              className="border-slate-300 text-slate-700 hover:border-slate-900 rounded-none px-6 py-4 text-sm font-medium tracking-wider uppercase"
+                            >
+                              <Link to="/submission">Submit Manuscript</Link>
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
