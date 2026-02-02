@@ -55,7 +55,7 @@ export default function Companies() {
             name="Blue Globe International" 
             focus="All Types of International Publications" 
             scope="International Publication"
-            logoUrl={null}
+            logoUrl="blue-globe"
             description="Blue Globe International is our flagship international publishing division, handling all types of academic publications for the global market."
             manuscripts="International Research Papers, Global Collaborative Works, Cross-cultural Studies"
           />
@@ -64,7 +64,7 @@ export default function Companies() {
             name="Aquitas International" 
             focus="Global & International Academic Publications" 
             scope="International Publication"
-            logoUrl={null}
+            logoUrl="aquitas"
             description="Aquitas International specializes in global academic publications with a focus on equity, fairness, and scholarly excellence."
             manuscripts="International Journals, Global Academic Books, Transnational Research"
           />
