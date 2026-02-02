@@ -8,6 +8,47 @@ import { BookOpen, BookMarked, FileText, ArrowRight, User, Building2, X, Shoppin
 const WHATSAPP_CATALOGUE = "https://wa.me/c/916284607500";
 
 const publications = [
+  // New SPA Publications books
+  {
+    id: "21",
+    title: "Role of ADR in the Resolution of Trademark Disputes",
+    author: "Adv. Sapna Desai",
+    publication_type: "book",
+    publisher: "SPA Publications",
+    publisher_slug: "spa-publications",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/2mt5vb94_IMG-20251121-WA0005.jpg",
+  },
+  {
+    id: "22",
+    title: "Social-Media & Crimes Against Women: Legal and Social Perspectives",
+    author: "Dr. Shraddha Som Singh",
+    publication_type: "book",
+    publisher: "SPA Publications",
+    publisher_slug: "spa-publications",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/8mhbpmwx_IMG-20251009-WA0011.jpg",
+  },
+  {
+    id: "23",
+    title: "India's Social Media Paradox: Freedom of Speech vs. Hate Speech and Extremism",
+    author: "Rajem M.P. Natthan, Dr. M.A. Saleem Ahmed",
+    publication_type: "book",
+    publisher: "SPA Publications",
+    publisher_slug: "spa-publications",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/cdby8ckl_IMG-20251009-WA0008.jpg",
+  },
+  {
+    id: "24",
+    title: "Protection of Children against Sexual Harassment in India",
+    author: "Dr. R. Uma Rani",
+    publication_type: "book",
+    publisher: "SPA Publications",
+    publisher_slug: "spa-publications",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/0tnlj6dh_IMG-20251007-WA0001.jpg",
+  },
   // Intellect Jurists Publishers - Textbooks
   {
     id: "16",
@@ -31,7 +72,7 @@ const publications = [
   },
   {
     id: "18",
-    title: "The New Wage Code, 2019: A Critical Study on Universal Minimum Wages for Organized and Unorganized Labour in India",
+    title: "The New Wage Code, 2019: A Critical Study on Universal Minimum Wages",
     author: "Dr. S. Mano",
     publication_type: "textbook",
     publisher: "Intellect Jurists Publishers",
