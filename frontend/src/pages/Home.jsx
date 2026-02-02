@@ -123,9 +123,27 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <CompanyCard icon={BookOpen} name="SPA Publications" focus="Authored Books & Research" scope="National" slug="spa-publications" color="bg-amber-50 text-amber-700" />
-            <CompanyCard icon={Scale} name="Legal Luminaries" focus="Edited Books All Subjects" scope="National" slug="legal-luminaries" color="bg-blue-50 text-blue-700" />
-            <CompanyCard icon={GraduationCap} name="Intellect Jurists" focus="Academic Textbooks" scope="National" slug="intellect-jurists" color="bg-emerald-50 text-emerald-700" />
+            <CompanyCard 
+              name="SPA Publications" 
+              focus="Authored Books & Research" 
+              scope="National" 
+              slug="spa-publications" 
+              logoUrl="https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/7cl4e1on_IMG-20250617-WA0005.jpg"
+            />
+            <CompanyCard 
+              name="Legal Luminaries" 
+              focus="Edited Books All Subjects" 
+              scope="National" 
+              slug="legal-luminaries" 
+              logoUrl="https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/igfim3dc_1.png"
+            />
+            <CompanyCard 
+              name="Intellect Jurists" 
+              focus="Academic Textbooks" 
+              scope="National" 
+              slug="intellect-jurists" 
+              logoUrl="https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/mqtsm5l5_2.png"
+            />
             <CompanyCard icon={Globe} name="Blue Globe International" focus="International Publications" scope="International" slug="blue-globe-international" color="bg-sky-50 text-sky-700" />
             <CompanyCard icon={Award} name="Aquitas International" focus="Global Academic Publications" scope="International" slug="aquitas-international" color="bg-violet-50 text-violet-700" />
           </div>
@@ -160,14 +178,20 @@ export default function Home() {
   );
 }
 
-function CompanyCard({ icon: Icon, name, focus, scope, slug, color }) {
+function CompanyCard({ icon: Icon, name, focus, scope, slug, color, logoUrl }) {
   return (
     <Link to={`/companies/${slug}`} data-testid={`company-card-${slug}`}>
       <Card className="h-full bg-white border border-slate-100 shadow-sm hover:shadow-lg hover:border-[#C5A059]/30 hover:-translate-y-1 transition-all duration-300 rounded-none overflow-hidden group">
         <CardContent className="p-8">
-          <div className={`w-14 h-14 ${color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-            <Icon className="w-7 h-7" />
-          </div>
+          {logoUrl ? (
+            <div className="w-16 h-16 bg-slate-50 rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform overflow-hidden">
+              <img src={logoUrl} alt={name} className="w-full h-full object-contain p-1" />
+            </div>
+          ) : (
+            <div className={`w-14 h-14 ${color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
+              <Icon className="w-7 h-7" />
+            </div>
+          )}
           <span className={`inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase mb-4 ${scope === "International" ? "bg-[#C5A059]/10 text-[#C5A059]" : "bg-slate-100 text-slate-600"}`}>
             {scope}
           </span>
