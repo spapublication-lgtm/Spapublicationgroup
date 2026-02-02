@@ -39,13 +39,11 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link to="/" data-testid="logo-link" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-slate-900 flex items-center justify-center">
-              <span className="text-[#C5A059] font-serif font-bold text-xl">S</span>
-            </div>
-            <div className="hidden sm:block">
-              <p className="font-serif text-lg font-semibold text-slate-900">SPA Publication</p>
-              <p className="text-xs text-slate-500 tracking-widest uppercase">Group</p>
-            </div>
+            <img 
+              src="https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/7cl4e1on_IMG-20250617-WA0005.jpg" 
+              alt="SPA Publication Group" 
+              className="h-14 w-auto"
+            />
           </Link>
 
           <div className="hidden lg:flex items-center gap-1">

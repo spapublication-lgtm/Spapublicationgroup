@@ -8,13 +8,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
             <Link to="/" className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-[#C5A059] flex items-center justify-center">
-                <span className="text-slate-950 font-serif font-bold text-2xl">S</span>
-              </div>
-              <div>
-                <p className="font-serif text-xl font-semibold text-white">SPA Publication</p>
-                <p className="text-xs text-slate-400 tracking-widest uppercase">Group</p>
-              </div>
+              <img 
+                src="https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/7cl4e1on_IMG-20250617-WA0005.jpg" 
+                alt="SPA Publication Group" 
+                className="h-16 w-auto"
+              />
             </Link>
             <p className="text-slate-400 text-sm">
               Premier academic publishing consortium dedicated to scholarly excellence.
