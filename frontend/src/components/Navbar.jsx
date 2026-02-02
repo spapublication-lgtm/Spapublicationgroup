@@ -25,7 +25,6 @@ export default function Navbar() {
     { name: "Publications", path: "/publications" },
     { name: "Submission", path: "/submission" },
     { name: "Directors", path: "/directors" },
-    { name: "Office Bearers", path: "/office-bearers" },
     { name: "Contact", path: "/contact" },
   ];
 
