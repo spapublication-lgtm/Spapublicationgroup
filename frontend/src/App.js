@@ -2,7 +2,6 @@ import "@/App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
 
-// Pages
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Companies from "@/pages/Companies";
@@ -12,9 +11,8 @@ import Submission from "@/pages/Submission";
 import OfficeBearers from "@/pages/OfficeBearers";
 import Contact from "@/pages/Contact";
 
-// Layout
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 function App() {
   return (
