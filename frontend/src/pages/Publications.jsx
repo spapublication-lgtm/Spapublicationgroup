@@ -8,6 +8,57 @@ import { BookOpen, BookMarked, FileText, ArrowRight, User, Building2, X, Shoppin
 const WHATSAPP_CATALOGUE = "https://wa.me/c/916284607500";
 
 const publications = [
+  // Intellect Jurists Publishers - Textbooks
+  {
+    id: "16",
+    title: "A Textbook on Electronic Media in India",
+    author: "Dr. Pratima Sudam Bansod, Dr. Vandana Bhivsen Sirsath",
+    publication_type: "textbook",
+    publisher: "Intellect Jurists Publishers",
+    publisher_slug: "intellect-jurists",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/c8c7j0ws_IMG-20251220-WA0004.jpg",
+  },
+  {
+    id: "17",
+    title: "Intersection of Disability and Employment Laws in India",
+    author: "Nancy Kanwar",
+    publication_type: "textbook",
+    publisher: "Intellect Jurists Publishers",
+    publisher_slug: "intellect-jurists",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/xe3ce5ds_IMG-20251009-WA0003.jpg",
+  },
+  {
+    id: "18",
+    title: "The New Wage Code, 2019: A Critical Study on Universal Minimum Wages for Organized and Unorganized Labour in India",
+    author: "Dr. S. Mano",
+    publication_type: "textbook",
+    publisher: "Intellect Jurists Publishers",
+    publisher_slug: "intellect-jurists",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/0ecj7491_IMG-20251124-WA0004.jpg",
+  },
+  {
+    id: "19",
+    title: "Judicial Discretion in Granting Bail: Analyzing the Divergent Judicial Trends",
+    author: "Ms. Aiswarya S, Mr. I Madhav Ganesh",
+    publication_type: "textbook",
+    publisher: "Intellect Jurists Publishers",
+    publisher_slug: "intellect-jurists",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/4nnnl5lj_IMG-20251120-WA0001.jpg",
+  },
+  {
+    id: "20",
+    title: "Medical Termination of Pregnancy Act, 1971: Moral and Social Issues",
+    author: "Ms. Priyanka Khule Kandelkar, Prof. Krishna Ahirao Iyer",
+    publication_type: "textbook",
+    publisher: "Intellect Jurists Publishers",
+    publisher_slug: "intellect-jurists",
+    year: 2025,
+    cover_image: "https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/ch3vxe6g_IMG-20251121-WA0006.jpg",
+  },
   // SPA Publications books
   {
     id: "11",
@@ -198,6 +249,19 @@ export default function Publications() {
   const companyName = companyFilter ? companyNames[companyFilter] : null;
   const bookCount = publications.filter(p => p.publication_type === 'book').length;
   const editedCount = publications.filter(p => p.publication_type === 'edited_volume').length;
+  const textbookCount = publications.filter(p => p.publication_type === 'textbook').length;
+
+  const getTypeLabel = (type) => {
+    if (type === "edited_volume") return "Edited Volume";
+    if (type === "textbook") return "Textbook";
+    return "Book";
+  };
+
+  const getTypeBadgeColor = (type) => {
+    if (type === "textbook") return "bg-emerald-100 text-emerald-700";
+    if (type === "edited_volume") return "bg-[#C5A059]/10 text-[#C5A059]";
+    return "bg-blue-100 text-blue-700";
+  };
 
   return (
     <div data-testid="publications-page" className="min-h-screen pt-20">
@@ -237,16 +301,19 @@ export default function Publications() {
           )}
 
           <Tabs value={activeTab} onValueChange={setActiveTab}>
-            <div className="flex justify-center mb-12">
+            <div className="flex justify-center mb-12 overflow-x-auto">
               <TabsList className="bg-white border p-1 rounded-none">
-                <TabsTrigger value="all" data-testid="tab-all" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
-                  <BookMarked className="w-4 h-4 mr-2" /> All ({companyFilter ? filtered.length : publications.length})
+                <TabsTrigger value="all" data-testid="tab-all" className="px-4 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white text-sm">
+                  <BookMarked className="w-4 h-4 mr-2" /> All ({publications.length})
                 </TabsTrigger>
-                <TabsTrigger value="book" data-testid="tab-book" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
+                <TabsTrigger value="book" data-testid="tab-book" className="px-4 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white text-sm">
                   <BookOpen className="w-4 h-4 mr-2" /> Books ({bookCount})
                 </TabsTrigger>
-                <TabsTrigger value="edited_volume" data-testid="tab-edited" className="px-6 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white">
-                  <FileText className="w-4 h-4 mr-2" /> Edited Volumes ({editedCount})
+                <TabsTrigger value="edited_volume" data-testid="tab-edited" className="px-4 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white text-sm">
+                  <FileText className="w-4 h-4 mr-2" /> Edited ({editedCount})
+                </TabsTrigger>
+                <TabsTrigger value="textbook" data-testid="tab-textbook" className="px-4 py-3 rounded-none data-[state=active]:bg-slate-900 data-[state=active]:text-white text-sm">
+                  <BookOpen className="w-4 h-4 mr-2" /> Textbooks ({textbookCount})
                 </TabsTrigger>
               </TabsList>
             </div>
@@ -269,7 +336,6 @@ export default function Publications() {
                     <Card key={pub.id} className="bg-white border rounded-none overflow-hidden group hover:shadow-xl transition-all" data-testid={`publication-card-${pub.id}`}>
                       <div className="aspect-[3/4] overflow-hidden bg-slate-100 relative">
                         <img src={pub.cover_image} alt={pub.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                        {/* Buy Now Overlay */}
                         <div className="absolute inset-0 bg-slate-900/80 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                           <a 
                             href={WHATSAPP_CATALOGUE} 
@@ -282,10 +348,8 @@ export default function Publications() {
                         </div>
                       </div>
                       <CardContent className="p-4">
-                        <span className={`inline-block px-2 py-0.5 text-xs font-semibold tracking-wider uppercase mb-2 ${
-                          pub.publication_type === "book" ? "bg-blue-100 text-blue-700" : "bg-[#C5A059]/10 text-[#C5A059]"
-                        }`}>
-                          {pub.publication_type === "edited_volume" ? "Edited Volume" : "Book"}
+                        <span className={`inline-block px-2 py-0.5 text-xs font-semibold tracking-wider uppercase mb-2 ${getTypeBadgeColor(pub.publication_type)}`}>
+                          {getTypeLabel(pub.publication_type)}
                         </span>
                         <h3 className="font-serif text-sm font-medium text-slate-900 mb-2 line-clamp-2 group-hover:text-[#C5A059] transition-colors leading-tight">
                           {pub.title}
@@ -296,9 +360,8 @@ export default function Publications() {
                         </div>
                         <div className="flex items-center gap-1 text-slate-400 text-xs mb-3">
                           <Building2 className="w-3 h-3" />
-                          <span className="truncate">{pub.publisher.replace(" Publication House", "")}</span>
+                          <span className="truncate">{pub.publisher.replace(" Publication House", "").replace(" Publishers", "")}</span>
                         </div>
-                        {/* Buy Now Button */}
                         <a 
                           href={WHATSAPP_CATALOGUE} 
                           target="_blank" 
@@ -323,7 +386,6 @@ export default function Publications() {
         </div>
       </section>
 
-      {/* For More / Contact Section */}
       <section className="py-16 bg-[#C5A059]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
