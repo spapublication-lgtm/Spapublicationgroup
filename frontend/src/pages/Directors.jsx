@@ -42,6 +42,7 @@ export default function Directors() {
               qualifications="Details will be added soon"
               bio="The Managing Director oversees all operations of SPA Publication Group, ensuring excellence in academic publishing across all five publishing houses. They are responsible for strategic planning, business development, and maintaining the highest standards of scholarly publishing."
               expertise={["Strategic Leadership", "Academic Publishing", "Business Development", "Quality Assurance"]}
+              photoUrl="https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/g55d1lrl_IMG-20250212-WA0002.jpg"
             />
 
             {/* Director of Publications */}
@@ -130,7 +131,7 @@ export default function Directors() {
   );
 }
 
-function DirectorCard({ position, name, qualifications, bio, expertise, reverse = false }) {
+function DirectorCard({ position, name, qualifications, bio, expertise, reverse = false, photoUrl }) {
   return (
     <Card className="bg-slate-50 border-0 rounded-none overflow-hidden">
       <CardContent className="p-0">
@@ -138,8 +139,12 @@ function DirectorCard({ position, name, qualifications, bio, expertise, reverse 
           {/* Photo Section */}
           <div className={`lg:col-span-4 bg-slate-100 p-8 flex items-center justify-center ${reverse ? "lg:order-2" : ""}`}>
             <div className="text-center">
-              <div className="w-48 h-48 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <User className="w-24 h-24 text-slate-300" />
+              <div className="w-48 h-48 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg overflow-hidden">
+                {photoUrl ? (
+                  <img src={photoUrl} alt={name} className="w-full h-full object-cover" />
+                ) : (
+                  <User className="w-24 h-24 text-slate-300" />
+                )}
               </div>
               <div className="bg-[#C5A059] px-6 py-2 inline-block">
                 <Briefcase className="w-5 h-5 text-slate-950 inline mr-2" />
