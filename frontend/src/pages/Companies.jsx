@@ -1,35 +1,58 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  BookOpen,
-  Scale,
-  GraduationCap,
-  Globe,
-  Award,
-  ArrowRight,
-} from "lucide-react";
-import { companyInfo } from "@/data/companies";
+import { BookOpen, Scale, GraduationCap, Globe, Award, ArrowRight } from "lucide-react";
+import axios from "axios";
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 const iconMap = {
-  "spa-publications": BookOpen,
-  "legal-luminaries": Scale,
-  "intellect-jurists": GraduationCap,
-  "blue-globe-international": Globe,
-  "aquitas-international": Award,
+  BookOpen: BookOpen,
+  Scale: Scale,
+  GraduationCap: GraduationCap,
+  Globe: Globe,
+  Award: Award,
 };
 
 const colorMap = {
-  amber: "bg-amber-50 text-amber-700",
-  blue: "bg-blue-50 text-blue-700",
-  emerald: "bg-emerald-50 text-emerald-700",
-  sky: "bg-sky-50 text-sky-700",
-  violet: "bg-violet-50 text-violet-700",
+  BookOpen: "bg-amber-50 text-amber-700",
+  Scale: "bg-blue-50 text-blue-700",
+  GraduationCap: "bg-emerald-50 text-emerald-700",
+  Globe: "bg-sky-50 text-sky-700",
+  Award: "bg-violet-50 text-violet-700",
 };
 
 export default function Companies() {
-  const companySlugs = Object.keys(companyInfo);
+  const [companies, setCompanies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCompanies = async () => {
+      try {
+        const response = await axios.get(`${API}/companies`);
+        setCompanies(response.data);
+      } catch (error) {
+        console.error("Error fetching companies:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCompanies();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-20 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-[#C5A059] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-slate-600">Loading companies...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div data-testid="companies-page" className="min-h-screen pt-20">
@@ -63,14 +86,13 @@ export default function Companies() {
       <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-8">
-            {companySlugs.map((slug, index) => {
-              const company = companyInfo[slug];
-              const IconComponent = iconMap[slug];
-              const colorClass = colorMap[company.color];
+            {companies.map((company, index) => {
+              const IconComponent = iconMap[company.icon] || BookOpen;
+              const colorClass = colorMap[company.icon] || "bg-slate-100 text-slate-700";
               
               return (
                 <motion.div
-                  key={slug}
+                  key={company.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -78,7 +100,7 @@ export default function Companies() {
                 >
                   <Card
                     className="bg-white border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 rounded-none overflow-hidden"
-                    data-testid={`company-row-${slug}`}
+                    data-testid={`company-row-${company.slug}`}
                   >
                     <CardContent className="p-0">
                       <div className="grid lg:grid-cols-12 gap-0">
@@ -113,7 +135,7 @@ export default function Companies() {
                                 Manuscripts Accepted
                               </p>
                               <div className="flex flex-wrap gap-2">
-                                {company.manuscripts.map((item) => (
+                                {company.manuscripts_accepted.map((item) => (
                                   <span key={item} className="bg-slate-100 text-slate-700 px-3 py-1 text-sm">
                                     {item}
                                   </span>
@@ -124,10 +146,10 @@ export default function Companies() {
                           <div className="flex gap-4">
                             <Button
                               asChild
-                              data-testid={`company-learn-more-${slug}`}
+                              data-testid={`company-learn-more-${company.slug}`}
                               className="bg-slate-900 hover:bg-slate-800 text-white rounded-none px-6 py-4 text-sm font-medium tracking-wider uppercase"
                             >
-                              <Link to={`/companies/${slug}`}>
+                              <Link to={`/companies/${company.slug}`}>
                                 Learn More
                                 <ArrowRight className="ml-2 w-4 h-4" />
                               </Link>
