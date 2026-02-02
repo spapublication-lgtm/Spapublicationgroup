@@ -9,24 +9,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "About Us", path: "/about" },
-  {
-    name: "Our Companies",
-    path: "/companies",
-    dropdown: [
-      { name: "SPA Publications", path: "/companies/spa-publications" },
-      { name: "Legal Luminaries", path: "/companies/legal-luminaries" },
-      { name: "Intellect Jurists", path: "/companies/intellect-jurists" },
-      { name: "Blue Globe International", path: "/companies/blue-globe-international" },
-      { name: "Aquitas International", path: "/companies/aquitas-international" },
-    ],
-  },
-  { name: "Publications", path: "/publications" },
-  { name: "Submission", path: "/submission" },
-  { name: "Office Bearers", path: "/office-bearers" },
-  { name: "Contact", path: "/contact" },
+const companyLinks = [
+  { name: "SPA Publications", path: "/companies/spa-publications" },
+  { name: "Legal Luminaries", path: "/companies/legal-luminaries" },
+  { name: "Intellect Jurists", path: "/companies/intellect-jurists" },
+  { name: "Blue Globe International", path: "/companies/blue-globe-international" },
+  { name: "Aquitas International", path: "/companies/aquitas-international" },
 ];
 
 export default function Navbar() {
@@ -83,60 +71,116 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) =>
-              link.dropdown ? (
-                <DropdownMenu key={link.name}>
-                  <DropdownMenuTrigger asChild>
-                    <button
-                      data-testid={`nav-${link.name.toLowerCase().replace(/\s+/g, "-")}`}
-                      className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors ${
-                        isActive(link.path)
-                          ? "text-[#C5A059]"
-                          : "text-slate-600 hover:text-slate-900"
-                      }`}
-                    >
-                      {link.name}
-                      <ChevronDown className="w-4 h-4" />
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="center" className="w-56">
-                    <DropdownMenuItem asChild>
-                      <Link
-                        to={link.path}
-                        className="w-full font-medium"
-                        data-testid="nav-all-companies"
-                      >
-                        All Companies
-                      </Link>
-                    </DropdownMenuItem>
-                    {link.dropdown.map((item) => (
-                      <DropdownMenuItem key={item.path} asChild>
-                        <Link
-                          to={item.path}
-                          className="w-full"
-                          data-testid={`nav-${item.name.toLowerCase().replace(/\s+/g, "-")}`}
-                        >
-                          {item.name}
-                        </Link>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  data-testid={`nav-${link.name.toLowerCase().replace(/\s+/g, "-")}`}
-                  className={`px-4 py-2 text-sm font-medium transition-colors nav-link ${
-                    isActive(link.path)
+            <Link
+              to="/"
+              data-testid="nav-home"
+              className={`px-4 py-2 text-sm font-medium transition-colors nav-link ${
+                isActive("/") && location.pathname === "/"
+                  ? "text-[#C5A059]"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              Home
+            </Link>
+            
+            <Link
+              to="/about"
+              data-testid="nav-about-us"
+              className={`px-4 py-2 text-sm font-medium transition-colors nav-link ${
+                isActive("/about")
+                  ? "text-[#C5A059]"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              About Us
+            </Link>
+
+            {/* Companies Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  data-testid="nav-our-companies"
+                  className={`flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors ${
+                    isActive("/companies")
                       ? "text-[#C5A059]"
                       : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
-                  {link.name}
-                </Link>
-              )
-            )}
+                  Our Companies
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="center" className="w-56">
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/companies"
+                    className="w-full font-medium"
+                    data-testid="nav-all-companies"
+                  >
+                    All Companies
+                  </Link>
+                </DropdownMenuItem>
+                {companyLinks.map((item) => (
+                  <DropdownMenuItem key={item.path} asChild>
+                    <Link
+                      to={item.path}
+                      className="w-full"
+                      data-testid={`nav-${item.name.toLowerCase().replace(/\s+/g, "-")}`}
+                    >
+                      {item.name}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <Link
+              to="/publications"
+              data-testid="nav-publications"
+              className={`px-4 py-2 text-sm font-medium transition-colors nav-link ${
+                isActive("/publications")
+                  ? "text-[#C5A059]"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              Publications
+            </Link>
+
+            <Link
+              to="/submission"
+              data-testid="nav-submission"
+              className={`px-4 py-2 text-sm font-medium transition-colors nav-link ${
+                isActive("/submission")
+                  ? "text-[#C5A059]"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              Submission
+            </Link>
+
+            <Link
+              to="/office-bearers"
+              data-testid="nav-office-bearers"
+              className={`px-4 py-2 text-sm font-medium transition-colors nav-link ${
+                isActive("/office-bearers")
+                  ? "text-[#C5A059]"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              Office Bearers
+            </Link>
+
+            <Link
+              to="/contact"
+              data-testid="nav-contact"
+              className={`px-4 py-2 text-sm font-medium transition-colors nav-link ${
+                isActive("/contact")
+                  ? "text-[#C5A059]"
+                  : "text-slate-600 hover:text-slate-900"
+              }`}
+            >
+              Contact
+            </Link>
           </div>
 
           {/* CTA Button */}
@@ -166,34 +210,87 @@ export default function Navbar() {
             data-testid="mobile-menu"
             className="lg:hidden bg-white border-t border-slate-100 py-4"
           >
-            {navLinks.map((link) => (
-              <div key={link.name}>
+            <Link
+              to="/"
+              className={`block px-4 py-3 text-sm font-medium transition-colors ${
+                location.pathname === "/"
+                  ? "text-[#C5A059] bg-slate-50"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+              }`}
+            >
+              Home
+            </Link>
+            <Link
+              to="/about"
+              className={`block px-4 py-3 text-sm font-medium transition-colors ${
+                isActive("/about")
+                  ? "text-[#C5A059] bg-slate-50"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+              }`}
+            >
+              About Us
+            </Link>
+            <Link
+              to="/companies"
+              className={`block px-4 py-3 text-sm font-medium transition-colors ${
+                isActive("/companies")
+                  ? "text-[#C5A059] bg-slate-50"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+              }`}
+            >
+              Our Companies
+            </Link>
+            <div className="pl-8">
+              {companyLinks.map((item) => (
                 <Link
-                  to={link.path}
-                  data-testid={`mobile-nav-${link.name.toLowerCase().replace(/\s+/g, "-")}`}
-                  className={`block px-4 py-3 text-sm font-medium transition-colors ${
-                    isActive(link.path)
-                      ? "text-[#C5A059] bg-slate-50"
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
-                  }`}
+                  key={item.path}
+                  to={item.path}
+                  className="block px-4 py-2 text-sm text-slate-500 hover:text-slate-900"
                 >
-                  {link.name}
+                  {item.name}
                 </Link>
-                {link.dropdown && (
-                  <div className="pl-8">
-                    {link.dropdown.map((item) => (
-                      <Link
-                        key={item.path}
-                        to={item.path}
-                        className="block px-4 py-2 text-sm text-slate-500 hover:text-slate-900"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
+            <Link
+              to="/publications"
+              className={`block px-4 py-3 text-sm font-medium transition-colors ${
+                isActive("/publications")
+                  ? "text-[#C5A059] bg-slate-50"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+              }`}
+            >
+              Publications
+            </Link>
+            <Link
+              to="/submission"
+              className={`block px-4 py-3 text-sm font-medium transition-colors ${
+                isActive("/submission")
+                  ? "text-[#C5A059] bg-slate-50"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+              }`}
+            >
+              Submission
+            </Link>
+            <Link
+              to="/office-bearers"
+              className={`block px-4 py-3 text-sm font-medium transition-colors ${
+                isActive("/office-bearers")
+                  ? "text-[#C5A059] bg-slate-50"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+              }`}
+            >
+              Office Bearers
+            </Link>
+            <Link
+              to="/contact"
+              className={`block px-4 py-3 text-sm font-medium transition-colors ${
+                isActive("/contact")
+                  ? "text-[#C5A059] bg-slate-50"
+                  : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
+              }`}
+            >
+              Contact
+            </Link>
             <div className="px-4 pt-4">
               <Button
                 asChild
