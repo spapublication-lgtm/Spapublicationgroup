@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BookOpen, Scale, GraduationCap, Globe, Award, ArrowRight } from "lucide-react";
+import { BookOpen, ArrowRight } from "lucide-react";
 
 export default function Companies() {
   return (
@@ -28,8 +28,7 @@ export default function Companies() {
             name="SPA Publications" 
             focus="Authored Books & Research Books" 
             scope="National Publication"
-            icon={BookOpen}
-            color="bg-amber-50 text-amber-700"
+            logoUrl="https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/7cl4e1on_IMG-20250617-WA0005.jpg"
             description="SPA Publications specializes in publishing authored books and research monographs across diverse academic disciplines."
             manuscripts="Research Monographs, Authored Academic Books, Scholarly Treatises"
           />
@@ -38,8 +37,7 @@ export default function Companies() {
             name="Legal Luminaries Publication House" 
             focus="Edited Books Across All Subjects" 
             scope="National Publication"
-            icon={Scale}
-            color="bg-blue-50 text-blue-700"
+            logoUrl="https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/igfim3dc_1.png"
             description="Legal Luminaries Publication House is dedicated to publishing high-quality edited volumes featuring contributions from multiple scholars."
             manuscripts="Edited Volumes, Multi-author Collections, Conference Proceedings"
           />
@@ -48,8 +46,7 @@ export default function Companies() {
             name="Intellect Jurists Publishers" 
             focus="Textbooks for All Academic Subjects" 
             scope="National Publication"
-            icon={GraduationCap}
-            color="bg-emerald-50 text-emerald-700"
+            logoUrl="https://customer-assets.emergentagent.com/job_37efc3c3-f1a5-4028-a803-e9ddc7d446f6/artifacts/mqtsm5l5_2.png"
             description="Intellect Jurists Publishers focuses on developing comprehensive textbooks for students and educators across all academic subjects."
             manuscripts="Academic Textbooks, Study Guides, Course Materials"
           />
@@ -58,8 +55,7 @@ export default function Companies() {
             name="Blue Globe International" 
             focus="All Types of International Publications" 
             scope="International Publication"
-            icon={Globe}
-            color="bg-sky-50 text-sky-700"
+            logoUrl={null}
             description="Blue Globe International is our flagship international publishing division, handling all types of academic publications for the global market."
             manuscripts="International Research Papers, Global Collaborative Works, Cross-cultural Studies"
           />
@@ -68,8 +64,7 @@ export default function Companies() {
             name="Aquitas International" 
             focus="Global & International Academic Publications" 
             scope="International Publication"
-            icon={Award}
-            color="bg-violet-50 text-violet-700"
+            logoUrl={null}
             description="Aquitas International specializes in global academic publications with a focus on equity, fairness, and scholarly excellence."
             manuscripts="International Journals, Global Academic Books, Transnational Research"
           />
@@ -89,7 +84,7 @@ export default function Companies() {
   );
 }
 
-function CompanyRow({ slug, name, focus, scope, icon: Icon, color, description, manuscripts }) {
+function CompanyRow({ slug, name, focus, scope, logoUrl, description, manuscripts }) {
   const isInternational = scope.includes("International");
   const manuscriptList = manuscripts.split(", ");
   
@@ -98,8 +93,12 @@ function CompanyRow({ slug, name, focus, scope, icon: Icon, color, description, 
       <CardContent className="p-0">
         <div className="grid lg:grid-cols-12">
           <div className="lg:col-span-4 p-8 border-b lg:border-b-0 lg:border-r border-slate-100">
-            <div className={`w-16 h-16 flex items-center justify-center mb-6 ${color}`}>
-              <Icon className="w-8 h-8" />
+            <div className="w-24 h-24 flex items-center justify-center mb-6 bg-slate-50 rounded-lg overflow-hidden">
+              {logoUrl ? (
+                <img src={logoUrl} alt={name} className="w-full h-full object-contain p-2" />
+              ) : (
+                <BookOpen className="w-10 h-10 text-[#C5A059]" />
+              )}
             </div>
             <span className={`inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase mb-4 ${isInternational ? "bg-[#C5A059]/10 text-[#C5A059]" : "bg-slate-100 text-slate-600"}`}>
               {scope}
